@@ -1,7 +1,7 @@
 from torch.utils.data import Dataset
 from pathlib import Path
 from src import logger_config
-from torcvision.datasets import ImageFolder
+from torchvision.datasets import ImageFolder
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 root_dir = PROJECT_ROOT / "data" / "train"
@@ -9,7 +9,7 @@ root_dir = PROJECT_ROOT / "data" / "train"
 logger = logger_config.setup_logger(name="dataset_logger")
 
 
-class ArtDataset(Dataset):
+class ImageDataset(Dataset):
     def __init__(self, root_dir=root_dir, transform=None):
         self.dataset = ImageFolder(root=root_dir, transform=transform)
         logger.info(f"Dataset initialized with {len(self.dataset)} samples.")
