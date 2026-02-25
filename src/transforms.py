@@ -2,8 +2,8 @@ from torchvision import transforms
 
 
 def get_transform():
-    mean = [0.485, 0.456, 0.406]
-    std = [0.229, 0.224, 0.225]
+    mean = [0.4843, 0.4340, 0.3911]
+    std = [0.2415, 0.2331, 0.2263]
 
     data_transforms = {
         "train": transforms.Compose(
