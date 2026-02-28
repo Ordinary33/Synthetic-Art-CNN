@@ -160,6 +160,9 @@ def train():
 
         dummy_input = torch.randn(1, 3, 256, 256).to(DEVICE)
 
+        model_filename = f"aidcn_{run.name}.onnx"
+        onnx_path = MODELS_DIR / "artifacts" / model_filename
+        onnx_path.mkdir(parents=True, exist_ok=True)
         torch.onnx.export(model, dummy_input, "aidcnn.onnx")
         wandb.save("aidcnn.onnx")
 
