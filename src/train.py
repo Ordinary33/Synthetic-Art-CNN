@@ -162,9 +162,9 @@ def train():
 
         model_filename = f"aidcn_{run.name}.onnx"
         onnx_path = MODELS_DIR / "artifacts" / model_filename
-        onnx_path.mkdir(parents=True, exist_ok=True)
-        torch.onnx.export(model, dummy_input, "aidcnn.onnx")
-        wandb.save("aidcnn.onnx")
+        onnx_path.parent.mkdir(parents=True, exist_ok=True)
+        torch.onnx.export(model, dummy_input, str(onnx_path))
+        wandb.save(str(onnx_path))
 
 
 if __name__ == "__main__":
