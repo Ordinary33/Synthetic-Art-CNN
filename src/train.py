@@ -7,12 +7,18 @@ from pathlib import Path
 import torch
 import torch.optim as optim
 import torch.nn as nn
-from torch.scheduler import ReduceLROnPlateau
+from torch.optim.lr_scheduler import ReduceLROnPlateau
 from tqdm import tqdm
 
 import wandb
+import os
+from dotenv import load_dotenv
 
-wandb.login()
+load_dotenv()
+
+wandb_key = os.getenv("WANDB_API_KEY")
+
+wandb.login(key=wandb_key)
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 MODELS_DIR = PROJECT_ROOT / "models" / "checkpoints"
