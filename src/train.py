@@ -164,10 +164,13 @@ def train():
 
         logger.info("Training Complete")
 
+        best_checkpoint = torch.load(checkpoint_path)
+        model.load_state_dict(best_checkpoint["model_state_dict"])
+
         dummy_input = torch.randn(1, 3, 256, 256).to(DEVICE)
 
         model_filename = f"aidcn_{run.name}.onnx"
-        onnx_path = MODELS_DIR / "artifacts" / model_filename
+        onnx_path = PROJECT_ROOT / "models" / "artifacts" / model_filename
         onnx_path.parent.mkdir(parents=True, exist_ok=True)
         torch.onnx.export(model, dummy_input, str(onnx_path))
         wandb.save(str(onnx_path))
