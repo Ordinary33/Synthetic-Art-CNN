@@ -8,23 +8,15 @@ TARGET_SIZE = 256
 
 def preprocess_image(pil_image: Image.Image):
     """
-    Matches torchvision.Compose([CenterCrop(256), ToTensor(), Normalize(mean, std)])
+    Matches transform.Compose([CenterCrop(256), ToTensor(), Normalize(mean, std)])
     """
     img = pil_image.convert("RGB")
 
     w, h = img.size
-    if w > h:
-        new_h = TARGET_SIZE
-        new_w = int(w * (TARGET_SIZE / h))
 
-    else:
-        new_w = TARGET_SIZE
-        new_h = int(h * (TARGET_SIZE / w))
+    left = (w - TARGET_SIZE) // 2
+    top = (h - TARGET_SIZE) // 2
 
-    img = img.resize((new_w, new_h), Image.Resampling.LANCZOS)
-
-    left = (new_w - TARGET_SIZE) / 2
-    top = (new_h - TARGET_SIZE) / 2
     img = img.crop((left, top, left + TARGET_SIZE, top + TARGET_SIZE))
 
     img_np = np.array(img).astype(np.float32) / 255.0
