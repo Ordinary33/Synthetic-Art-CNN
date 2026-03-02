@@ -42,7 +42,7 @@ def classify_image(image: Image.Image, selected_model: str):
 
         result = response.json()
         label = result["label"]
-        confidence = result["confidence"] * 100
+        confidence = f"{result['confidence'] * 100: .2f}%"
 
         return label, confidence
 
@@ -53,8 +53,10 @@ def classify_image(image: Image.Image, selected_model: str):
 available_models = get_available_models()
 
 with gr.Blocks(title="AI Image Detector", theme=gr.themes.Soft()) as ui:
-    gr.Markdown("AI Image Detector")
-    gr.Markdown("Select a custom model and upload an image in JPG format")
+    gr.Markdown("<h1 style='text-align: center;'>🎨 AI Image Detector</h1>")
+    gr.Markdown(
+        "<p style='text-align: center; font-size: 110%; color: gray;'>Select a custom model and upload an image in JPG format</p>"
+    )
 
     with gr.Row():
         with gr.Column():
