@@ -56,20 +56,20 @@ async def classify_image(file: UploadFile = File(...), model_name: str = Form(..
                 status_code=500, detail=f"Failed to load engine: {str(e)}"
             )
 
-        try:
-            image_bytes = await file.read()
-            image = Image.open(io.BytesIO(image_bytes))
-        except Exception as e:
-            raise HTTPException(
-                status_code=400, detail=f"Could not read image file: {str(e)}"
-            )
+    try:
+        image_bytes = await file.read()
+        image = Image.open(io.BytesIO(image_bytes))
+    except Exception as e:
+        raise HTTPException(
+            status_code=400, detail=f"Could not read image file: {str(e)}"
+        )
 
-        try:
-            result = detector_engine.classify(image)
-            return {
-                "label": result["label"],
-                "confidence": result["confidence"],
-                "model_used": current_model_name,
-            }
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=f"Inference error: {str(e)}")
+    try:
+        result = detector_engine.classify(image)
+        return {
+            "label": result["label"],
+            "confidence": result["confidence"],
+            "model_used": current_model_name,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Inference error: {str(e)}")
