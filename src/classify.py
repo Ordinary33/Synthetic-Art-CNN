@@ -14,8 +14,7 @@ class AIDetector:
         self.classes = ["AI-Generated", "Non-AI-Generated"]
         self.model_path = MODEL_PATH / model
         self.session = ort.InferenceSession(
-            str(self.model_path),
-            providers=["CUDAExecutionProvider", "CPUExecutionProvider"],
+            str(self.model_path), providers=["CPUExecutionProvider"]
         )
         self.input_name = self.session.get_inputs()[0].name
 
