@@ -15,7 +15,7 @@ It features a production-ready inference engine optimized for CPU usage via ONNX
 ## 🚀 Key Features
 
 * **⚡ Custom Architecture:** Architected a specialized CNN from scratch (rather than using pre-trained Transfer Learning) to specifically target high-frequency diffusion noise patterns.
-* **📷 Robust Preprocessing:** Implements exact "CenterCrop" logic to preserve microscopic pixel artifacts. Unlike standard resizing (which blurs AI noise), this acts as a "forensic lens" for the model.
+* **📷 Robust Preprocessing:** Implements exact "CenterCrop" logic to preserve microscopic pixel artifacts. Unlike standard resizing (which blurs AI noise).
 * **🧠 ONNX Inference:** The PyTorch model is exported to ONNX format, allowing the system to run highly efficient CPU-based inference without heavy GPU dependencies.
 * **📝 Microservice Design:** Fully decoupled architecture with a **FastAPI** backend for processing and a **Gradio** frontend for user interaction.
 
